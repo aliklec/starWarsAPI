@@ -1,47 +1,44 @@
-let button = document.querySelector("#button");
-let name = document.querySelector("#name");
-let tall = document.querySelector("#height");
-let weight = document.querySelector("#mass");
-let birth = document.querySelector("#dob");
+findLove.addEventListener("click", showLove);
+function showLove(){
+ 
+ let randomLove = Math.floor((Math.random()*88)+1);
+ let apiUrl = "https://swapi.co/api/people/" + randomLove;
 
-button.addEventListener("click", getHero);
-
-function getHero(){
-	updateWithLoading();
-	let randomHero = Math.floor((Math.random()* 88) +1 );
-
-	let apiUrl = "https://swapi.co/api/people/" + randomHero;
-
-	axios.get(apiUrl).then(function(response){
-		updateInfo(response.data);
-	}).catch(e => {
-		updateInfoWithError();
-	})
-}
+ axios.get(apiUrl).then(function(response){
+  updateInfo(response.data);
+ }).catch(e => {
+  updateInfoWithError();
+ });
 
 function updateInfo(data){
-	name.innerHTML = `Name: ${data.name}`;
-	height.innerHTML = `Height: ${data.height}`;
-	mass.innerHTML = `Weight: ${data.mass}`;
-	dob.innerHTML = `Birth Year: ${data.birth_year}`;
-
+  fullName.innerHTML = data.name;
+  height.innerHTML = "<b>Height</b>: " + data.height;
+  weight.innerHTML = "<b>Weight</b>: " + data.mass;
+  gender.innerHTML = "<b>Gender</b>: " + data.gender;
+  hair.innerHTML = "<b>Hair Color</b>: " + data.hair_color;
+  eye.innerHTML = "<b>Eye Color</b>: " + data.eye_color;
+  birth.innerHTML = "<b>Birth Year</b>: " + data.birth_year;
 }
 
-function updateInfoWithError(){
-	name.innerHTML = "This person already taken.";
-	height.innerHTML = "";	
-	mass.innerHTML = "";
-	dob.innerHTML = "";
-
+function updateInforWithError(){
+  fullName.innerHTML = "Your ship has sailed";
+  height.innerHTML = "";
+  weight.innerHTML = "";
+  gender.innerHTML = "";
+  hair.innerHTML = "";
+  eye.innerHTML = "";
+  birth.innerHTML = "";
 }
 
 function updateWithLoading(){
-	name.innerHTML = '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>';
-	height.innerHTML = "";	
-	mass.innerHTML = "";
-	dob.innerHTML = "";
-
+  fullName.innerHTML = '<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>';
+  height.innerHTML = "";
+  weight.innerHTML = "";
+  gender.innerHTML = "";
+  hair.innerHTML = "";
+  eye.innerHTML = "";
+  birth.innerHTML = "";
+ }
 }
-
 
 
